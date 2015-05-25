@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 
 class ApiTest(unittest.TestCase):
     def setUp(self):
-        self.api = PagarmeApi(endpoint=__endpoint__, api_key='ak_test_gyrZdScNg3V8u0YBA095uFpTMEUXct')
+        self.api = PagarmeApi(endpoint=__endpoint__, api_key='')
 
     def test_default_headers(self):
         self.assertIsInstance(self.api.default_headers, dict)
