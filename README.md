@@ -1,4 +1,4 @@
-pagarme.py - Pagar.me`s Python REST API
+pagarme.py
 =======================================
 
 Pagar.me's Python API
