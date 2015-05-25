@@ -1,11 +1,8 @@
-pygarme
-==========================
+pagarme.py - Pagar.me`s Python REST API
+=======================================
 
+Pagar.me's Python API
 
-Pagar.me`s Python API
-
-
-```
 
 ## Requirements
 
