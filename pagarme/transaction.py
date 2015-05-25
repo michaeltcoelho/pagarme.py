@@ -12,31 +12,54 @@ class Transaction(Resource):
         self.assign(response)
         return self.success()
 
-    def get_antifraud_analysis(self, analysis_id, transaction_id=None):
-
+    def get_split_rules(self, split_rules_id, transaction_id=None):
         if not transaction_id:
             transaction_id = self.id
+        url = make_url('/transactions', str(transaction_id), '/split_rules', str(split_rules_id))
+        response = self.api.get(url)
+        return Resource(response)
 
+    def get_all_split_rules(self, transaction_id=None):
+        if not transaction_id:
+            transaction_id = self.id
+        url = make_url('/transactions', str(transaction_id), '/split_rules')
+        response = self.api.get(url)
+        split_rules = [Resource(item) for item in response]
+        return split_rules
+
+    def get_payable(self, payable_id, transaction_id=None):
+        if not transaction_id:
+            transaction_id = self.id
+        url = make_url('/transactions', str(transaction_id), '/payables', str(payable_id))
+        response = self.api.get(url)
+        return Resource(response)
+
+    def get_all_payables(self, transaction_id=None):
+        if not transaction_id:
+            transaction_id = self.id
+        url = make_url('/transactions', str(transaction_id), '/payables')
+        response = self.api.get(url)
+        payables = [Resource(item) for item in response]
+        return payables
+
+    def get_antifraud_analysis(self, analysis_id, transaction_id=None):
+        if not transaction_id:
+            transaction_id = self.id
         url = make_url('/transactions', str(transaction_id), '/antifraud_analyses', str(analysis_id))
         response = self.api.get(url)
-        analysis = [Resource(item) for item in response]
-        return analysis
+        return Resource(response)
 
     def get_all_antifraud_analysis(self, transaction_id=None):
-
         if not transaction_id:
             transaction_id = self.id
-
         url = make_url('/transactions', str(transaction_id), '/antifraud_analyses')
         response = self.api.get(url)
         analysis = [Resource(item) for item in response]
         return analysis
 
     def collect_payment(self, transaction_id=None):
-
         if not transaction_id:
             transaction_id = self.id
-
         url = make_url('/transactions', str(transaction_id), '/collect_payment')
         response = self.api.post(url)
         self.assign(response)
@@ -53,6 +76,13 @@ class Transaction(Resource):
         response = self.api.post(url)
         self.assign(response)
         return self.success()
+
+    @staticmethod
+    def generate_hash_key():
+        api = default_api()
+        url = make_url('/transactions', '/card_hash_key')
+        response = api.get(url, params={'encryption_key': api.encryption_key})
+        return Resource(response)
 
     @classmethod
     def find(cls, transaction_id):

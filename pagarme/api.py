@@ -5,10 +5,8 @@ import datetime
 import requests
 import json
 
-
 from pagarme.config import __endpoint__, __user_agent__
 from pagarme import exceptions, util
-
 
 logger = logging.getLogger('pygarme')
 
@@ -20,6 +18,7 @@ class PagarmeApi(object):
         """
         self.endpoint = kwargs.get('endpoint', self.default_endpoint)
         self.apikey = kwargs.get('api_key')
+        self.encryption_key = kwargs.get('encryption_key')
         if not self.apikey:
             raise exceptions.NullAPIKeyError('The `api_key` must be set.')
 
@@ -101,9 +100,10 @@ def default_api():
     if __default_api__ is None:
         try:
             api_key = os.environ["PAGARME_API_KEY"]
+            encryption_key = os.environ["PAGARME_ENCRYPTION_KEY"]
         except KeyError:
             raise exceptions.NullAPIKeyError("Required PAGARME_API_KEY")
-        __default_api__ = PagarmeApi(api_key=api_key)
+        __default_api__ = PagarmeApi(api_key=api_key, encryption_key=encryption_key)
     return __default_api__
 
 
