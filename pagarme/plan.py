@@ -5,7 +5,7 @@ from pagarme.util import make_url
 
 
 class Plan(Resource):
-    """Plan class wrapping the endpoint /plans
+    """plans class wrapping the REST /plans endpoint
     """
     def create(self):
         response = self.api.post('/plans', self.to_dict())
