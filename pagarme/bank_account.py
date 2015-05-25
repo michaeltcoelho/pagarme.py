@@ -4,6 +4,6 @@ from pagarme.resource import Resource
 from pagarme.util import make_url
 
 
-class Subscription(Resource):
-    """Subscription class wrapping the REST /subscription endpoint
+class BankAccount(Resource):
+    """BankAccount class wrapping the REST /bank_accounts endpoint
     """

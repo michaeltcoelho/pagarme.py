@@ -12,11 +12,50 @@ class Transaction(Resource):
         self.assign(response)
         return self.success()
 
+    def get_antifraud_analysis(self, analysis_id, transaction_id=None):
+
+        if not transaction_id:
+            transaction_id = self.id
+
+        url = make_url('/transactions', str(transaction_id), '/antifraud_analyses', str(analysis_id))
+        response = self.api.get(url)
+        analysis = [Resource(item) for item in response]
+        return analysis
+
+    def get_all_antifraud_analysis(self, transaction_id=None):
+
+        if not transaction_id:
+            transaction_id = self.id
+
+        url = make_url('/transactions', str(transaction_id), '/antifraud_analyses')
+        response = self.api.get(url)
+        analysis = [Resource(item) for item in response]
+        return analysis
+
+    def collect_payment(self, transaction_id=None):
+
+        if not transaction_id:
+            transaction_id = self.id
+
+        url = make_url('/transactions', str(transaction_id), '/collect_payment')
+        response = self.api.post(url)
+        self.assign(response)
+        return self.success()
+
+    def capture(self, transaction_id):
+        url = make_url('/transactions', str(transaction_id), '/capture')
+        response = self.api.post(url)
+        self.assign(response)
+        return self.success()
+
     def refund(self, transaction_id):
         url = make_url('/transactions', str(transaction_id), '/refund')
+        response = self.api.post(url)
+        self.assign(response)
+        return self.success()
 
     @classmethod
-    def find(cls, transaction_id, bank):
+    def find(cls, transaction_id):
         api = default_api()
         url = make_url('/transactions', str(transaction_id))
         return cls(api.get(url))
