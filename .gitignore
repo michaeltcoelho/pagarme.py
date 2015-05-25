@@ -1,14 +1,10 @@
-<<<<<<< HEAD
 # Byte-compiled / optimized / DLL files
 __pycache__/
-=======
->>>>>>> development
-*.py[cod]
+*.pyc
 
 # C extensions
 *.so
 
-<<<<<<< HEAD
 # Distribution / packaging
 .Python
 env/
@@ -59,7 +55,7 @@ docs/_build/
 
 # PyBuilder
 target/
-=======
+
 # Packages
 *.egg
 *.egg-info
@@ -95,4 +91,3 @@ htmlcov
 
 # Pycharm
 .idea
->>>>>>> development
