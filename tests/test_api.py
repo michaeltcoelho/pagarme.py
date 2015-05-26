@@ -1,6 +1,8 @@
 # coding:utf-8
+import os
 import logging
 import unittest
+
 from pagarme.api import PagarmeApi
 from pagarme.config import __endpoint__, __user_agent__
 from pagarme.exceptions import NullAPIKeyError
@@ -11,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 
 class ApiTest(unittest.TestCase):
     def setUp(self):
-        self.api = PagarmeApi(endpoint=__endpoint__, api_key='')
+        self.api = PagarmeApi(endpoint=__endpoint__, api_key=os.environ['PAGARME_API_KEY'])
 
     def test_default_headers(self):
         self.assertIsInstance(self.api.default_headers, dict)

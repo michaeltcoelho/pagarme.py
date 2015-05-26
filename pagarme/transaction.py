@@ -5,25 +5,14 @@ from urllib import urlencode
 
 from pagarme.api import default_api
 from pagarme.resource import Resource
-from pagarme.util import make_url, merge_dict
-from pagarme.metadata import MetaData, CustomerMetaData
-from pagarme.exceptions import MetaDataInstanceError, CustomerInstanceError
+from pagarme.util import make_url
 
 
 class Transaction(Resource):
     """Transaction class wrapping the REST /transactions endpoint
     """
-    def create(self, metadata=None, customer=None):
-
-        if metadata and not isinstance(metadata, MetaData):
-            raise MetaDataInstanceError('The metadata parameter must be an object of `MetaData`:class:')
-
-        if customer and not isinstance(customer, CustomerMetaData):
-            raise CustomerInstanceError('The customer parameter must be an object of `CustomerMetaData`:class:')
-
-        customer = customer.to_dict() if customer else {}
-        metadata = metadata.to_dict() if metadata else {}
-        response = self.api.post('/transactions', params=merge_dict(self.to_dict(), customer, metadata))
+    def create(self):
+        response = self.api.post('/transactions', data=self.to_dict())
         self.assign(response)
         return self.success()
 
