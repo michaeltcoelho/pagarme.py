@@ -21,9 +21,9 @@ class Transaction(Resource):
         if customer and not isinstance(customer, CustomerMetaData):
             raise CustomerInstanceError('The customer parameter must be an object of `CustomerMetaData`:class:')
 
-        metadata = metadata.to_dict() if metadata else {}
         customer = customer.to_dict() if customer else {}
-        response = self.api.post('/transactions', params=merge_dict(self.to_dict(), metadata, customer))
+        metadata = metadata.to_dict() if metadata else {}
+        response = self.api.post('/transactions', params=merge_dict(self.to_dict(), customer, metadata))
         self.assign(response)
         return self.success()
 

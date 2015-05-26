@@ -2,18 +2,18 @@
 
 
 class MetaData(object):
-    def __init__(self, **kwargs):
+    def __init__(self, kwargs):
         self.kwargs = kwargs
 
     def to_dict(self):
         metadata = {}
-        for k, v in self.kwargs:
+        for k, v in self.kwargs.items():
             metadata['metadata[%s]' % k] = v
         return metadata
 
 
 class CustomerMetaData(object):
-    def __init__(self, **kwargs):
+    def __init__(self, kwargs):
         self.kwargs = kwargs
 
     def to_dict(self):

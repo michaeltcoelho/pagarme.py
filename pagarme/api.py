@@ -58,7 +58,7 @@ class PagarmeApi(object):
         try:
             response = requests.request(method=method, url=url, data=json.dumps(request_data), headers=http_headers)
         except exceptions.BadRequestError as e:
-            return json.loads({'error': e.content})
+            return json.loads({'errors': e.content})
 
         duration = datetime.datetime.now() - start
 
