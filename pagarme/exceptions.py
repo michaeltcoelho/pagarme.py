@@ -31,3 +31,16 @@ class ClientError(ConnectionError):
 class BadRequestError(ClientError):
     """400 Error Code
     """
+
+
+class MetaDataInstanceError(Exception):
+    """Raised when a metadata object passed to a resource
+     is not a instance of `MetaData` class.
+    """
+
+
+class CustomerInstanceError(Exception):
+    """Raised when a customer metadata object passed to a resource
+     is not a instance of `CustomerMetaData` class.
+    """
+

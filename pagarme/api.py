@@ -57,8 +57,6 @@ class PagarmeApi(object):
 
         try:
             response = requests.request(method=method, url=url, data=json.dumps(request_data), headers=http_headers)
-
-            print response
         except exceptions.BadRequestError as e:
             return json.loads({'error': e.content})
 
@@ -102,7 +100,7 @@ def default_api():
             api_key = os.environ["PAGARME_API_KEY"]
             encryption_key = os.environ["PAGARME_ENCRYPTION_KEY"]
         except KeyError:
-            raise exceptions.NullAPIKeyError("Required PAGARME_API_KEY")
+            raise exceptions.NullAPIKeyError("Required PAGARME_API_KEY and PAGARME_ENCRYPTION_KEY")
         __default_api__ = PagarmeApi(api_key=api_key, encryption_key=encryption_key)
     return __default_api__
 

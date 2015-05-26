@@ -1,14 +1,25 @@
 # coding:utf-8
 from pagarme.api import default_api
 from pagarme.resource import Resource
-from pagarme.util import make_url
+from pagarme.util import make_url, merge_dict
+from pagarme.metadata import MetaData, CustomerMetaData
+from pagarme.exceptions import MetaDataInstanceError, CustomerInstanceError
 
 
 class Transaction(Resource):
     """Transaction class wrapping the REST /transactions endpoint
     """
-    def create(self):
-        response = self.api.post('/transactions', self.to_dict())
+    def create(self, metadata=None, customer=None):
+
+        if metadata and not isinstance(metadata, MetaData):
+            raise MetaDataInstanceError('The metadata parameter must be an object of `MetaData`:class:')
+
+        if customer and not isinstance(customer, CustomerMetaData):
+            raise MetaDataInstanceError('The customer parameter must be an object of `CustomerMetaData`:class:')
+
+        metadata = metadata.to_dict() if metadata else {}
+        customer = customer.to_dict() if customer else {}
+        response = self.api.post('/transactions', params=merge_dict(self.to_dict(), metadata, customer))
         self.assign(response)
         return self.success()
 
@@ -27,7 +38,7 @@ class Transaction(Resource):
         split_rules = [Resource(item) for item in response]
         return split_rules
 
-    def get_payable(self, payable_id, transaction_id=None):
+    def get_payables(self, payable_id, transaction_id=None):
         if not transaction_id:
             transaction_id = self.id
         url = make_url('/transactions', str(transaction_id), '/payables', str(payable_id))

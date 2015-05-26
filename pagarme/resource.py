@@ -45,10 +45,3 @@ class Resource(object):
             return list(map(self.__parse, obj))
         else:
             return obj
-
-
-class Search(Resource):
-    """Search - Performs an `ElasticSearch` query
-    """
-    def search(self):
-        pass
