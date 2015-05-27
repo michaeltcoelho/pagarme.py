@@ -3,6 +3,7 @@ import os
 import unittest
 
 from pagarme.transaction import Transaction
+from pagarme.card_hash import CardHash
 from pagarme.enum import payment_methods, transaction_states
 
 
@@ -17,12 +18,8 @@ class TransactionTest(unittest.TestCase):
             'card_cvv': '314'
         }
 
-    def test_card_hash_key_generate(self):
-        response = Transaction.generate_hash_key(self.card)
-        self.assertEqual(response.success(), True)
-
     def test_create_without_antifraud(self):
-        hash_key = Transaction.generate_hash_key(self.card)
+        hash_key = CardHash.generate_hash_key(self.card)
         transaction = Transaction({
             'card_hash': hash_key.card_hash,
             'amount': 20000,
@@ -36,7 +33,7 @@ class TransactionTest(unittest.TestCase):
 
     @unittest.skip('This test must be runned only when the AntiFraud option is enabled')
     def test_create_with_antifraud(self):
-        hash_key = Transaction.generate_hash_key(self.card)
+        hash_key = CardHash.generate_hash_key(self.card)
         transaction = Transaction({
             'card_hash': hash_key.card_hash,
             'amount': '20000',
@@ -86,7 +83,7 @@ class TransactionTest(unittest.TestCase):
         self.assertEqual(transaction[0].status, 'paid')
 
     def test_capture(self):
-        hash_key = Transaction.generate_hash_key(self.card)
+        hash_key = CardHash.generate_hash_key(self.card)
         transaction = Transaction({
             'card_hash': hash_key.card_hash,
             'amount': 20000,
