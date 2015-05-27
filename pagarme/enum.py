@@ -1,5 +1,10 @@
 # coding:utf-8
 
+__all__ = [
+    'payment_methods',
+    'transaction_states'
+]
+
 
 class Enum(set):
     """Enum - from http://stackoverflow.com/questions/36932/how-can-i-represent-an-enum-in-python
@@ -9,4 +14,18 @@ class Enum(set):
             return str(name).lower()
         raise AttributeError
 
-payment_method = Enum(['CREDIT_CARD', 'BOLETO'])
+
+payment_methods = Enum([
+    'CREDIT_CARD',
+    'BOLETO'
+])
+
+transaction_states = Enum([
+    'PROCESSING',
+    'AUTHORIZED',
+    'PAID',
+    'REFUNDED',
+    'WAITING_PAYMENT',
+    'PENDING_REFUND',
+    'REFUSED'
+])

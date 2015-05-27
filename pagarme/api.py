@@ -61,7 +61,7 @@ class PagarmeApi(object):
 
         duration = datetime.datetime.now() - start
 
-        logger.info('RESPONSE %s DURATION %s.%s' % (response.content, duration.seconds, duration.microseconds))
+        logger.info('RESPONSE %s DURATION %s.%s' % (response.encoding, duration.seconds, duration.microseconds))
 
         return json.loads(response.content) if response.content else {}
 
