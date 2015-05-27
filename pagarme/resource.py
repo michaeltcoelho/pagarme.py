@@ -3,7 +3,7 @@ from pagarme.api import default_api
 
 
 class Resource(object):
-    """Resource allows you to access the json response like a python object.
+    """`Resource`:class: allows you to access the json response like a python object.
     The `assign`:method: converts a dictionary to an object.
     The `success`:method: allow you check if the request has been OK.
     The `to_dict`:method: converts the object in a dictionary.

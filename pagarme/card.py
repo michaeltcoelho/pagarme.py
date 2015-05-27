@@ -5,7 +5,7 @@ from pagarme.util import make_url
 
 
 class Card(Resource):
-    """Card class wrapping the REST /cards endpoint
+    """`Card`:class: wrapping the REST /cards endpoint
     """
     def create(self):
         response = self.api.post('/cards', data=self.to_dict())

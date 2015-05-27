@@ -3,7 +3,7 @@ from pagarme.resource import Resource
 
 
 class Search(Resource):
-    """Search - Performs an `ElasticSearch` query
+    """`Search`:class: performs an `ElasticSearch` query
     """
     def search(self):
         pass

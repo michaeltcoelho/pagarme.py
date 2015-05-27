@@ -5,7 +5,7 @@ from pagarme.util import make_url
 
 
 class Subscription(Resource):
-    """Subscription class wrapping the REST /subscriptions endpoint
+    """`Subscription`:class: wrapping the REST /subscriptions endpoint
     """
     def create(self):
         response = self.api.post('/subscriptions', data=self.to_dict())

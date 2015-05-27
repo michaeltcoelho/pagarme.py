@@ -5,7 +5,7 @@ from pagarme.util import make_url
 
 
 class BankAccount(Resource):
-    """BankAccount class wrapping the REST /bank_accounts endpoint
+    """`BankAccount`:class: wrapping the REST /bank_accounts endpoint
     """
     def create(self):
         response = self.api.post('/bank_accounts', self.to_dict())

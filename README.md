@@ -3,6 +3,8 @@ pagarme.py
 
 Pagar.me's Python API
 
+Pagar.me`s [https://pagar.me/docs/](https://pagar.me/docs/)
+
 
 ## Requirements
 
