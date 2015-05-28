@@ -52,16 +52,9 @@ class ApiTest(unittest.TestCase):
         }
         plan = self.api.post('/plans', data=plan)
         name = {'name': 'intermediate'}
-        plan = self.api.put('/plans/%s' % plan['id'], params=name)
+        plan = self.api.put('/plans/%s' % plan['id'], data=name)
         self.assertEqual('intermediate', name['name'])
 
     def test_api_bad_request(self):
         response = self.api.post('/plans')
         self.assertNotEqual(response.get('errors'), None)
-
-    def tearDown(self):
-        plans = self.api.get('/plans')
-        for plan in plans:
-            self.api.delete('/plans/%s' % plan['id'])
-        plans = self.api.get('/plans')
-        self.assertEqual(plans, [])
