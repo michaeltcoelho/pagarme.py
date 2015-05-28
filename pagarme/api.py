@@ -56,35 +56,41 @@ class PagarmeApi(object):
         start = datetime.datetime.now()
 
         try:
-            response = requests.request(method=method, url=url, data=json.dumps(request_data), headers=http_headers)
+            response = requests.request(method=method, url=url, data=json.dumps(request_data),
+                                        headers=http_headers)
         except exceptions.BadRequestError as e:
             return json.loads({'errors': e.content})
 
         duration = datetime.datetime.now() - start
 
-        logger.info('RESPONSE %s DURATION %s.%s' % (response.encoding, duration.seconds, duration.microseconds))
+        logger.info('RESPONSE %s DURATION %s.%s' % (response.encoding, duration.seconds,
+                                                    duration.microseconds))
 
         return json.loads(response.content) if response.content else {}
 
     def get(self, action, params=None, headers=None):
         """Makes a GET request
         """
-        return self.request(make_url(self.endpoint, action), method='GET', data=params, headers=headers)
+        return self.request(make_url(self.endpoint, action), method='GET', data=params,
+                            headers=headers)
 
     def post(self, action, data=None, headers=None):
         """Makes a GET request
         """
-        return self.request(make_url(self.endpoint, action), method='POST', data=data, headers=headers)
+        return self.request(make_url(self.endpoint, action), method='POST', data=data,
+                            headers=headers)
 
     def put(self, action, data=None, headers=None):
         """Makes a GET request
         """
-        return self.request(make_url(self.endpoint, action), method='PUT', data=data, headers=headers)
+        return self.request(make_url(self.endpoint, action), method='PUT', data=data,
+                            headers=headers)
 
     def delete(self, action, headers=None):
         """Makes a GET request
         """
-        return self.request(make_url(self.endpoint, action), method='DELETE', headers=headers)
+        return self.request(make_url(self.endpoint, action), method='DELETE',
+                            headers=headers)
 
 
 __default_api__ = None

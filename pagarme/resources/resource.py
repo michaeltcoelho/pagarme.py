@@ -32,7 +32,7 @@ class Resource(object):
         try:
             self.__fields__['errors']
             return False
-        except KeyError as e:
+        except KeyError:
             return True
 
     def to_dict(self):

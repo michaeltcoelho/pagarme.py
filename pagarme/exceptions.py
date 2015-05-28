@@ -43,4 +43,3 @@ class CustomerInstanceError(Exception):
     """Raised when a customer metadata object passed to a resource
      is not a instance of `CustomerMetaData` class.
     """
-

@@ -7,7 +7,8 @@ __all__ = [
 
 
 class Enum(set):
-    """`Enum`:class: from http://stackoverflow.com/questions/36932/how-can-i-represent-an-enum-in-python
+    """`Enum`:class: from
+    http://stackoverflow.com/questions/36932/how-can-i-represent-an-enum-in-python
     """
     def __getattr__(self, name):
         if name in self:
