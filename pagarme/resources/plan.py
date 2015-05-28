@@ -1,7 +1,8 @@
 # coding:utf-8
 from pagarme.api import default_api
-from pagarme.resource import Resource
-from pagarme.util import make_url
+from pagarme.common import make_url
+
+from .resource import Resource
 
 
 class Plan(Resource):

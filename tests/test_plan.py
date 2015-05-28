@@ -1,7 +1,7 @@
 # coding:utf-8
 import unittest
 
-from pagarme.plan import Plan
+from pagarme.resources import Plan
 
 
 class PlanTest(unittest.TestCase):

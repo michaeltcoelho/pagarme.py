@@ -1,14 +1,24 @@
 # coding:utf-8
 from pagarme.api import default_api
-from pagarme.resource import Resource
-from pagarme.util import make_url
+from pagarme.common import make_url
+from pagarme.common import SplitRules
+
+from .resource import Resource
 
 
 class Transaction(Resource):
     """`Transaction`:class: wrapping the REST /transactions endpoint
     """
-    def create(self):
-        response = self.api.post('/transactions', data=self.to_dict())
+    def create(self, split_rules=None):
+        data = self.to_dict()
+
+        if split_rules and not isinstance(split_rules, SplitRules):
+            raise AttributeError('`split_rules` must be instance of `SplitRules`:class:')
+
+        if split_rules:
+            data['split_rules'] = split_rules.to_dict()
+
+        response = self.api.post('/transactions', data=data)
         self.assign(response)
         return self.success()
 
@@ -36,9 +46,11 @@ class Transaction(Resource):
         self.assign(response)
         return self.success()
 
-    def calculate_installments_amount(self, installment):
+    @staticmethod
+    def calculate_installments_amount(installment):
+        api = default_api()
         url = make_url('/transactions', '/calculate_installments_amount')
-        response = self.api.get(url, params=installment)
+        response = api.get(url, params=installment)
         return Resource(response['installments'])
 
     def get_split_rules_by_id(self, split_rules_id, transaction_id=None):

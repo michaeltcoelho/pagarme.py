@@ -1,5 +1,5 @@
 # coding:utf-8
-from pagarme.resource import Resource
+from .resource import Resource
 
 
 class Search(Resource):

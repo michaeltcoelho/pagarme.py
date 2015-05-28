@@ -1,7 +1,7 @@
 # coding:utf-8
 import unittest
 
-from pagarme.customer import Customer
+from pagarme.resources import Customer
 
 
 class CustomerTest(unittest.TestCase):

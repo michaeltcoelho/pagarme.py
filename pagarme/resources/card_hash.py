@@ -1,11 +1,11 @@
 # coding:utf-8
-import base64
 import rsa
+from base64 import b64encode
 from urllib import urlencode
 
 from pagarme.api import default_api
-from pagarme.resource import Resource
-from pagarme.util import make_url
+from pagarme.common import make_url
+from .resource import Resource
 
 
 class CardHash(object):
@@ -19,5 +19,5 @@ class CardHash(object):
         response = Resource(response)
         if response.success():
             public_key = rsa.PublicKey.load_pkcs1_openssl_pem(response.public_key)
-            response.card_hash = '%s_%s' % (response.id, base64.b64encode(rsa.encrypt(urlencode(card), public_key)))
+            response.card_hash = '%s_%s' % (response.id, b64encode(rsa.encrypt(urlencode(card), public_key)))
         return response

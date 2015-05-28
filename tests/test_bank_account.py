@@ -1,7 +1,7 @@
 # coding:utf-8
 import unittest
 
-from pagarme.bank_account import BankAccount
+from pagarme.resources import BankAccount
 
 
 class BankAccountTest(unittest.TestCase):

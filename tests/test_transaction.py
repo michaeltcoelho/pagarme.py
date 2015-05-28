@@ -2,9 +2,8 @@
 import os
 import unittest
 
-from pagarme.transaction import Transaction
-from pagarme.card_hash import CardHash
-from pagarme.enum import payment_methods, transaction_states
+from pagarme.resources import Transaction, CardHash, Recipient
+from pagarme.common import payment_methods, transaction_states
 
 
 class TransactionTest(unittest.TestCase):
@@ -64,6 +63,62 @@ class TransactionTest(unittest.TestCase):
         created = transaction.create()
         self.assertEqual(created, True)
         self.assertEqual(hash_key.card_hash, transaction.card_hash)
+
+    def test_create_with_split_rules(self):
+        hash_key = CardHash.generate_hash_key(self.card)
+
+        recipient = Recipient({
+            'transfer_interval': 'daily',
+            'transfer_day': 5,
+            'bank_account': {
+                'bank_code': '341',
+                'agencia': '0932',
+                'agencia_dv': '5',
+                'conta': '58054',
+                'conta_dv': '1',
+                'document_number': '26268738888',
+                'legal_name': 'API BANK ACCOUNT'
+            }
+        })
+
+        recipient2 = Recipient({
+            'transfer_interval': 'daily',
+            'transfer_day': 4,
+            'bank_account': {
+                'bank_code': '341',
+                'agencia': '0932',
+                'agencia_dv': '5',
+                'conta': '58054',
+                'conta_dv': '1',
+                'document_number': '26268738888',
+                'legal_name': 'API BANK ACCOUNT'
+            }
+        })
+        recipient.create()
+        recipient2.create()
+
+        transaction = Transaction({
+            'card_hash': hash_key.card_hash,
+            'amount': 20000,
+            'payment_method': payment_methods.CREDIT_CARD,
+            'installments': '1',
+            'capture': 'true',
+            'postback_url': 'http://requestb.in/ysys9uys',
+            'split_rules': [{
+                'recipient_id': recipient.id,
+                'charge_processing_fee': True,
+                'liable': True,
+                'percentage': 30
+            }, {
+                'recipient_id': recipient2.id,
+                'charge_processing_fee': True,
+                'liable': True,
+                'percentage': 70
+            }]
+        })
+
+        created = transaction.create()
+        self.assertEqual(created, True)
 
     def test_find(self):
         transaction = Transaction.find(208650)
@@ -126,7 +181,7 @@ class TransactionTest(unittest.TestCase):
             'interest_rate': 13,
             'amount': 1300
         }
-        installments = Transaction().calculate_installments_amount(installment)
+        installments = Transaction.calculate_installments_amount(installment)
 
         self.assertEqual(installments.success(), True)
         self.assertEqual(installments['1']['amount'], 1300)

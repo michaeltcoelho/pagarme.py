@@ -6,7 +6,8 @@ import requests
 import json
 
 from pagarme.config import __endpoint__, __user_agent__
-from pagarme import exceptions, util
+from pagarme import exceptions
+from pagarme.common import merge_dict, make_url
 
 logger = logging.getLogger('pygarme')
 
@@ -47,8 +48,8 @@ class PagarmeApi(object):
     def request(self, url, method, data=None, headers=None):
         """Makes a HTTP call, formats response and does error handling.
         """
-        http_headers = util.merge_dict(self.default_headers, headers or {})
-        request_data = util.merge_dict({'api_key': self.apikey}, data or {})
+        http_headers = merge_dict(self.default_headers, headers or {})
+        request_data = merge_dict({'api_key': self.apikey}, data or {})
 
         logger.info('HTTP %s REQUEST TO %s' % (method, url))
 
@@ -68,22 +69,22 @@ class PagarmeApi(object):
     def get(self, action, params=None, headers=None):
         """Makes a GET request
         """
-        return self.request(util.make_url(self.endpoint, action), method='GET', data=params, headers=headers)
+        return self.request(make_url(self.endpoint, action), method='GET', data=params, headers=headers)
 
     def post(self, action, data=None, headers=None):
         """Makes a GET request
         """
-        return self.request(util.make_url(self.endpoint, action), method='POST', data=data, headers=headers)
+        return self.request(make_url(self.endpoint, action), method='POST', data=data, headers=headers)
 
     def put(self, action, data=None, headers=None):
         """Makes a GET request
         """
-        return self.request(util.make_url(self.endpoint, action), method='PUT', data=data, headers=headers)
+        return self.request(make_url(self.endpoint, action), method='PUT', data=data, headers=headers)
 
     def delete(self, action, headers=None):
         """Makes a GET request
         """
-        return self.request(util.make_url(self.endpoint, action), method='DELETE', headers=headers)
+        return self.request(make_url(self.endpoint, action), method='DELETE', headers=headers)
 
 
 __default_api__ = None

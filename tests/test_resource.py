@@ -1,7 +1,7 @@
 # coding:utf-8
 import unittest
 
-from pagarme.resource import Resource
+from pagarme.resources.resource import Resource
 
 
 class ContextTest(unittest.TestCase):

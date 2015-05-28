@@ -1,7 +1,7 @@
 # coding:utf-8
 import unittest
 
-from pagarme.card import Card
+from pagarme.resources import Card
 
 
 class CardHashTest(unittest.TestCase):
