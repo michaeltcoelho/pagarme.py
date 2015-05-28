@@ -43,5 +43,7 @@ class Resource(object):
             return obj.to_dict()
         if isinstance(obj, list):
             return list(map(self.__parse, obj))
+        if isinstance(obj, dict):
+            return Resource(obj)
         else:
             return obj

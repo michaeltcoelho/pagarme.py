@@ -6,8 +6,8 @@ import requests
 import json
 
 from pagarme.config import __endpoint__, __user_agent__
-from pagarme import exceptions
 from pagarme.common import merge_dict, make_url
+from pagarme import exceptions
 
 logger = logging.getLogger('pygarme')
 

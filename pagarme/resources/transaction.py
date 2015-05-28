@@ -1,7 +1,6 @@
 # coding:utf-8
 from pagarme.api import default_api
 from pagarme.common import make_url
-from pagarme.common import SplitRules
 
 from .resource import Resource
 
@@ -9,16 +8,8 @@ from .resource import Resource
 class Transaction(Resource):
     """`Transaction`:class: wrapping the REST /transactions endpoint
     """
-    def create(self, split_rules=None):
-        data = self.to_dict()
-
-        if split_rules and not isinstance(split_rules, SplitRules):
-            raise AttributeError('`split_rules` must be instance of `SplitRules`:class:')
-
-        if split_rules:
-            data['split_rules'] = split_rules.to_dict()
-
-        response = self.api.post('/transactions', data=data)
+    def create(self):
+        response = self.api.post('/transactions', data=self.to_dict())
         self.assign(response)
         return self.success()
 
