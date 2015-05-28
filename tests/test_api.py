@@ -33,7 +33,7 @@ class ApiTest(unittest.TestCase):
 
     def test_api_get(self):
         response = self.api.get('/plans')
-        self.assertEqual(response, [])
+        self.assertGreater(len(response), 0)
 
     def test_api_post(self):
         plan = {
@@ -41,7 +41,7 @@ class ApiTest(unittest.TestCase):
             'days': '30',
             'name': 'basic',
         }
-        plan = self.api.post('/plans', params=plan)
+        plan = self.api.post('/plans', data=plan)
         self.assertNotIn('errors', plan)
 
     def test_api_put(self):
@@ -50,7 +50,7 @@ class ApiTest(unittest.TestCase):
             'days': '30',
             'name': 'intermediat',
         }
-        plan = self.api.post('/plans', params=plan)
+        plan = self.api.post('/plans', data=plan)
         name = {'name': 'intermediate'}
         plan = self.api.put('/plans/%s' % plan['id'], params=name)
         self.assertEqual('intermediate', name['name'])
