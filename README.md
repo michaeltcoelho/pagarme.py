@@ -1,18 +1,12 @@
 pagarme.py
 =======================================
-
-Pagar.me's Python API
-
-Pagar.me`s [https://pagar.me/docs/](https://pagar.me/docs/)
+[![BuildStatus](https://travis-ci.org/michaeltcoelho/pagarme.py)](https://travis-ci.org/michaeltcoelho/pagarme.py)
 
 
-## Requirements
+Pagar.me Python API
 
-Package requirements are handled using pip. To install them do
+** Consultar a documentacão oficial do Pagar.me: [https://pagar.me/docs/](https://pagar.me/docs/)
 
-```
-pip install -r requirements.txt
-```
 
 ## License
 
