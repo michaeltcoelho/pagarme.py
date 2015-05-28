@@ -1,7 +1,6 @@
 pagarme.py
 =======================================
-[![BuildStatus](https://travis-ci.org/michaeltcoelho/pagarme.py)](https://travis-ci.org/michaeltcoelho/pagarme.py)
-
+[![Build Status](https://travis-ci.org/michaeltcoelho/pagarme.py.svg)](https://travis-ci.org/michaeltcoelho/pagarme.py)
 
 Pagar.me Python API
 
