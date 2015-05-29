@@ -43,9 +43,10 @@ Como usar
 Registre-se no Pagar.me e pegue sua `Chave da API` e `Chave de criptografia` do ambiente de testes.
 [https://pagar.me/](https://pagar.me/).
 
-Configurar o pagarme.py através das próximas duas maneiras, ficará uma objeto global disponível `PagarmeApi:class:` que é responsável por manipular as requisições e respostas do Pagarm.me:
+Configurar o pagarme.py utilizando as próximas duas maneiras, ficará uma objeto global disponível da classe `PagarmeApi:class:` 
+que é responsável por manipular as requisições e respostas do Pagar.me:
 ```python
-form pagarme import api
+from pagarme import api
 
 api.configure({
     'api_key': 'Sua chave da API',
