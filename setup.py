@@ -29,7 +29,6 @@ setup(
     package_dir={'pagarme': 'pagarme'},
     include_package_data=True,
     install_requires=requirements,
-    install_requires=requirements,
     license='MIT License',
     test_suite='runtests',
     zip_safe=False,
