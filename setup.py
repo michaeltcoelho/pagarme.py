@@ -12,7 +12,7 @@ readme = open('README.md').read().strip()
 requirements = ['requests', 'rsa']
 
 setup(
-    name='pagarme.py',
+    name='pagarme-py',
     version=__version__,
     description='Pagar.me Python API wrapper',
     long_description=readme,
@@ -21,7 +21,6 @@ setup(
     url='https://github.com/michaeltcoelho/pagarme.py',
     download_url='https://github.com/michaeltcoelho/pagarme.py',
     packages=find_packages(),
-    package_dir={'pagarme': 'pagarme'},
     include_package_data=True,
     install_requires=requirements,
     license='MIT License',
