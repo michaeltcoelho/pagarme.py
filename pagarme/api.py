@@ -14,9 +14,10 @@ logger = logging.getLogger('pygarme')
 
 class PagarmeApi(object):
 
-    def __init__(self, **kwargs):
+    def __init__(self, options=None, **kwargs):
         """`PagarmeApi`:class: Creates an API object
         """
+        kwargs = merge_dict(options or {}, kwargs)
         self.endpoint = kwargs.get('endpoint', self.default_endpoint)
         self.apikey = kwargs.get('api_key')
         self.encryption_key = kwargs.get('encryption_key')
