@@ -29,7 +29,7 @@ setup(
     zip_safe=False,
     keywords='pagarme, payment, gateway, api, wrapper',
     classifiers=[
-        'Development Status :: 1 - Alpha',
+        'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'Natural Language :: English',
