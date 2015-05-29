@@ -5,8 +5,9 @@ pagarme.py
 
 O pagarme.py oferece integração com a API REST de pagamentos do Pagar.me utilizando Python.
 
-> ** Durante a integração de sua aplicacão com o Pagar.me, consultar a referência da API da mesma.
-> ** Referência da API [https://pagar.me/docs/api/](https://pagar.me/docs/api/)
+> Durante a integração de sua aplicacão com o Pagar.me, consulte a referência da API,
+> para estar ciente das informações necessárias para realizar a integracão.
+> Referência da API [https://pagar.me/docs/api/](https://pagar.me/docs/api/)
 
 
 Instalação
@@ -32,11 +33,41 @@ Testes
 
 Rodando os testes:
 
-```
+```bash
 make test
 ```
 
 Como usar
+===========================================
+
+Registre-se no Pagar.me e pegue sua `Chave da API` e `Chave de criptografia` do ambiente de testes.
+[https://pagar.me/](https://pagar.me/).
+
+Configurar o pagarme.py através das próximas duas maneiras, ficará uma objeto global disponível `PagarmeApi:class:` que é responsável por manipular as requisições e respostas do Pagarm.me:
+```python
+form pagarme import api
+
+api.configure({
+    'api_key': 'Sua chave da API',
+    'encryption_key': 'Sua chave de criptografia'})
+```
+Configure através de variáveis de ambiente:
+```bash
+export PAGARME_API_KEY='Sua chave da API'
+export PAGARME_ENCRYPTION_KEY='Sua chave de criptografia'
+```
+Para não trabalhar com um objeto global:
+```python
+from pagarme import api, resources
+
+my_api = api.PagarmeApi({
+    'api_key': 'Sua chave da API',
+    'encryption_key': 'Sua chave de criptografia'})
+
+plan = resources.Plan({...}, api=my_api)
+```
+
+Criar um Plano
 ===========================================
 
 ## License
