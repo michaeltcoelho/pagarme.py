@@ -16,7 +16,7 @@ Instalação
 Você pode instalar via pip:
 
 ```
-pip install pagarme.py
+pip install pagarmepy
 ```
 
 ou clonando o repositório e instalando localmente:

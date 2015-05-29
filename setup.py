@@ -12,7 +12,7 @@ readme = open('README.md').read().strip()
 requirements = ['requests', 'rsa']
 
 setup(
-    name='pagarme-py',
+    name='pagarmepy',
     version=__version__,
     description='Pagar.me Python API wrapper',
     long_description=readme,
