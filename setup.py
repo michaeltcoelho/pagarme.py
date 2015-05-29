@@ -1,10 +1,6 @@
 import os
 import sys
-
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup, find_packages
 
 from pagarme.config import __version__
 
@@ -23,9 +19,8 @@ setup(
     author='Michael Coelho',
     author_email='michael.tcoelho@gmail.com',
     url='https://github.com/michaeltcoelho/pagarme.py',
-    packages=[
-        'pagarme'
-    ],
+    download_url='https://github.com/michaeltcoelho/pagarme.py',
+    packages=find_packages(),
     package_dir={'pagarme': 'pagarme'},
     include_package_data=True,
     install_requires=requirements,
