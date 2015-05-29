@@ -20,8 +20,9 @@ class PagarmeApi(object):
         self.endpoint = kwargs.get('endpoint', self.default_endpoint)
         self.apikey = kwargs.get('api_key')
         self.encryption_key = kwargs.get('encryption_key')
-        if not self.apikey:
-            raise exceptions.NullAPIKeyError('The `api_key` must be set.')
+
+        if not self.apikey or not self.encryption_key:
+            raise exceptions.NullAPIKeyError('The `api_key` and `encryption_key` must be set.')
 
     @property
     def default_endpoint(self):
@@ -108,7 +109,7 @@ def default_api():
     return __default_api__
 
 
-def config(**kwargs):
+def configure(**kwargs):
     global __default_api__
     __default_api__ = PagarmeApi(**kwargs)
     return __default_api__
