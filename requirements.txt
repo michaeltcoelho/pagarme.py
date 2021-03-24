@@ -8,5 +8,5 @@ pep8==1.5.7
 pyasn1==0.1.7
 pyflakes==0.8.1
 requests==2.5.3
-rsa==3.1.4
+rsa==4.1
 six==1.9.0
